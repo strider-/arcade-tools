@@ -10,8 +10,7 @@ Custom API / CLI tooling for controlling my modified Arcade1Up cabinet. Run `mak
 ├── cmd
 │   ├── api   # json api project
 │   └── cli   # command line interface project
-├── internal  # private library code
-└── pkg       # public code
+└── internal  # private library code
 ```
 
 ## Expected RPi GPIO pin usage
