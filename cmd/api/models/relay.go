@@ -3,19 +3,19 @@ package models
 import "arcade-tools/internal/relay"
 
 type Relay struct {
-	Id    relay.Relay      `json:"id"`
+	Id    uint8            `json:"id"`
 	Name  string           `json:"name"`
 	State relay.RelayState `json:"state"`
 }
 
-func getName(r relay.Relay) string {
+func toDTO(r relay.Relay) (uint8, string) {
 	switch r {
 	case relay.Relay1:
-		return "lighting"
+		return 1, "lighting"
 	case relay.Relay2:
-		return "monitor"
+		return 2, "monitor"
 	default:
-		return "unknown"
+		return 0, "unknown"
 	}
 }
 
@@ -28,9 +28,10 @@ func ToActiveLowState(s relay.RelayState) relay.RelayState {
 }
 
 func NewRelay(r relay.Relay, s relay.RelayState) Relay {
+	id, name := toDTO(r)
 	return Relay{
-		Id:    r,
-		Name:  getName(r),
+		Id:    id,
+		Name:  name,
 		State: ToActiveLowState(s),
 	}
 }
