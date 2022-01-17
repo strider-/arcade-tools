@@ -1,6 +1,9 @@
 # arcade-tools
 
 Custom API / CLI tooling for controlling my modified Arcade1Up cabinet. Run `make help` to list all the available make commands for the project.
+In order to run `make install` or `make update` locally on the Pi, you may need to ensure that `$PATH` contains the go binary location (If you're unsure where it's been installed to, run `which go`). To do this, edit `/etc/sudoers` and ensure that `Defaults secure_path` contains the go binary location.
+
+Before you run `make update`, sure you have latest by running `git pull origin master`.
 
 ## Project structure
 ```
@@ -11,7 +14,8 @@ Custom API / CLI tooling for controlling my modified Arcade1Up cabinet. Run `mak
 │   ├── api   # json api project
 │   └── cli   # command line interface project
 ├── internal  # private library code
-└── scripts   # project scripts
+└── scripts   # project scripts/service definitions
+              # to be ran/installed on the RPi via make
 ```
 
 ## Expected RPi GPIO pin usage

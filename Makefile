@@ -33,7 +33,7 @@ build/api:
 build/cli:
 	@go build -o=./bin/arcade-tools ./cmd/cli/main.go
 
-## install: builds and installs the tools and services (run w/ sudo)
+## install: builds and installs the tools and services (run w/ sudo). once installed, use make update to keep them up-to-date.
 .PHONY: install
 install: build
 	@./scripts/install.sh
