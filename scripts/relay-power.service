@@ -1,0 +1,12 @@
+[Unit]
+Description=Ensures all connected relay channels are on at startup
+
+Wants=multi-user.target
+After=syslog.target
+
+[Service]
+Type=simple
+ExecStart=/opt/tools/powerup.sh
+
+[Install]
+WantedBy=multi-user.target

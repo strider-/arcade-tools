@@ -1,0 +1,11 @@
+[Unit]
+Description=Arcade Tools API Service
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/opt/tools/arcade-tools-api
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
