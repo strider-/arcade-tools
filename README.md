@@ -48,4 +48,6 @@ GET /api/v1/relays     # get info on both relays
 GET /api/v1/relay/:id  # get info on specific relay
 
 POST /api/v1/relay/:id # change relay state, id must be 1 or 2
+# { "state": 1 } to turn a relay on
+# { "state": 0 } to turn a relay off
 ```
