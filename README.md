@@ -15,6 +15,7 @@ Custom API / CLI tooling for controlling my modified Arcade1Up cabinet. Run `mak
 ```
 
 ## Expected RPi GPIO pin usage
+NOTE: The relay in question is assumed active low
 | Phys. Pin | GPIO # | Usage |
 |----------:|---------:|-------|
 |     2     |     5V   | Power |

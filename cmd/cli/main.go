@@ -1,66 +1,43 @@
 package main
 
 import (
-	"errors"
+	"arcade-tools/internal/relay"
 	"flag"
 	"fmt"
 	"os"
-
-	"github.com/stianeikeland/go-rpio/v4"
-)
-
-const (
-	// BCM #, not physical pin #
-	Relay1Pin = 18
-	Relay2Pin = 17
 )
 
 func main() {
-	gpioPin, state, err := parseArgs()
-	if err != nil {
-		fmt.Println("invalid arguments, use --help for usage.")
+	if len(flag.Args()) == 0 {
+		fmt.Println("missing arguments, use --help for usage")
 		os.Exit(0)
 	}
 
-	err = rpio.Open()
+	rly, state, err := parseArgs()
+
 	if err != nil {
-		panic(err)
+		fmt.Println("invalid arguments, use --help for usage.")
+		os.Exit(1)
 	}
-	defer rpio.Close()
 
-	pin := rpio.Pin(gpioPin)
-	pin.Output()
-
-	pin.Write(state)
+	relay.SetState(rly, state)
 }
 
-func parseArgs() (rpio.Pin, rpio.State, error) {
-	var relay int
+func parseArgs() (relay.Relay, relay.RelayState, error) {
+	var r int
 	var on bool
 	var off bool
 
-	flag.IntVar(&relay, "relay", 0, "Relay to change (1 or 2)")
+	flag.IntVar(&r, "relay", 0, "Relay to change (1 or 2)")
 	flag.BoolVar(&on, "on", false, "Turn the relay on")
 	flag.BoolVar(&off, "off", true, "Turn the relay off")
 	flag.Parse()
 
-	if relay != 1 && relay != 2 {
-		return 0, 0, errors.New("invalid relay and/or state")
+	pin, err := relay.ParseRelay(r)
+	if err != nil {
+		return 0, 0, err
 	}
 
-	var pin uint8
-	if relay == 1 {
-		pin = Relay1Pin
-	} else {
-		pin = Relay2Pin
-	}
-
-	var state uint8
-	if on {
-		state = 0
-	} else {
-		state = 1
-	}
-
-	return rpio.Pin(pin), rpio.State(state), nil
+	state := relay.ParseState(on)
+	return pin, state, nil
 }
