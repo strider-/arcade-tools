@@ -10,17 +10,20 @@ type RelayState uint8
 type Relay uint8
 
 const (
-	// The relay is active low, so 0 turns it on, 1 turns it off.
-	On  RelayState = 0
+	// The relay is active low, so 0 turns it on
+	On RelayState = 0
+	// The relay is active low, so 1 turns it off
 	Off RelayState = 1
 
+	// Relay1 represents GPIO 18 (BCM not physical)
 	Relay1 Relay = 18
+	// Relay2 represents GPIO 17 (BCM not physical)
 	Relay2 Relay = 17
 )
 
 var (
-	ErrInvalidRelay      = errors.New("invalid relay")
-	ErrInvalidRelayState = errors.New("invalid relay state")
+	// Returned when calling relay.ParseRelay with a value that's not 1 or 2
+	ErrInvalidRelay = errors.New("invalid relay")
 )
 
 func getPin(r Relay) (rpio.Pin, func() error) {
@@ -35,6 +38,7 @@ func getPin(r Relay) (rpio.Pin, func() error) {
 	return pin, rpio.Close
 }
 
+// Gets the current RelayState of the given Relay
 func GetState(r Relay) RelayState {
 	pin, cleanUp := getPin(r)
 	defer cleanUp()
@@ -42,6 +46,7 @@ func GetState(r Relay) RelayState {
 	return RelayState(pin.Read())
 }
 
+// Sets the RelayState of the given Relay
 func SetState(r Relay, s RelayState) {
 	pin, cleanUp := getPin(r)
 	defer cleanUp()
@@ -49,6 +54,7 @@ func SetState(r Relay, s RelayState) {
 	pin.Write(rpio.State(s))
 }
 
+// Parses an integer (1 or 2) into either Relay1 or Relay2. Returns ErrInvalidRelay with any other value
 func ParseRelay(relayNumber int) (Relay, error) {
 	switch relayNumber {
 	case 1:
@@ -60,6 +66,7 @@ func ParseRelay(relayNumber int) (Relay, error) {
 	}
 }
 
+// Parses a boolean into a RelayState. true is relay.On, false is relay.Off
 func ParseState(relayState bool) RelayState {
 	switch relayState {
 	case true:
