@@ -18,27 +18,54 @@ func GetRelays(c echo.Context) error {
 		models.NewRelay(relay.Relay2, r2),
 	}
 
-	return c.JSON(200, result)
+	return c.JSON(http.StatusOK, result)
 }
 
 func GetRelay(c echo.Context) error {
-	id, err := strconv.Atoi(c.Param("id"))
-	if err != nil {
-		return c.JSON(http.StatusBadRequest, models.NewApiError(err))
-	}
-
-	rly, err := relay.ParseRelay(id)
+	rly, err := getRelayFromId(c)
 	if err != nil {
 		return c.JSON(http.StatusBadRequest, models.NewApiError(err))
 	}
 
 	state := relay.GetState(rly)
 
-	return c.JSON(200, models.NewRelay(rly, state))
+	return c.JSON(http.StatusOK, models.NewRelay(rly, state))
 }
 
 func SetRelayState(c echo.Context) error {
-	return c.JSON(200, struct {
-		Ok bool `json:"ok"`
-	}{Ok: true})
+	rly, err := getRelayFromId(c)
+	if err != nil {
+		return c.JSON(http.StatusBadRequest, models.NewApiError(err))
+	}
+
+	var req struct {
+		State uint8 `json:"state"`
+	}
+
+	if err = c.Bind(&req); err != nil {
+		return c.JSON(http.StatusBadRequest, models.NewApiError(err))
+	}
+
+	state, err := relay.ParseUInt8State(req.State)
+	if err != nil {
+		return c.JSON(http.StatusBadRequest, models.NewApiError(err))
+	}
+
+	relay.SetState(rly, state)
+
+	return c.NoContent(http.StatusNoContent)
+}
+
+func getRelayFromId(c echo.Context) (relay.Relay, error) {
+	id, err := strconv.Atoi(c.Param("id"))
+	if err != nil {
+		return 0, err
+	}
+
+	rly, err := relay.ParseRelay(id)
+	if err != nil {
+		return 0, err
+	}
+
+	return rly, nil
 }

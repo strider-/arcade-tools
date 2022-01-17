@@ -20,9 +20,12 @@ func getName(r relay.Relay) string {
 }
 
 func NewRelay(r relay.Relay, s relay.RelayState) Relay {
+	// State is using a binary NOT to toggle the 1 bit, to ensure clients
+	// see 1 for on and 0 for off.
+
 	return Relay{
 		Id:    r,
 		Name:  getName(r),
-		State: s,
+		State: s ^ 1,
 	}
 }

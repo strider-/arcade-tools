@@ -24,6 +24,8 @@ const (
 var (
 	// Returned when calling relay.ParseRelay with a value that's not 1 or 2
 	ErrInvalidRelay = errors.New("invalid relay")
+	// Returned when calling relay.ParseUInt8State with a value that's not 1 or 2
+	ErrInvalidRelayState = errors.New("invalid relay state")
 )
 
 func getPin(r Relay) (rpio.Pin, func() error) {
@@ -67,11 +69,22 @@ func ParseRelay(relayNumber int) (Relay, error) {
 }
 
 // Parses a boolean into a RelayState. true is relay.On, false is relay.Off
-func ParseState(relayState bool) RelayState {
+func ParseBoolState(relayState bool) RelayState {
 	switch relayState {
 	case true:
 		return On
 	default:
 		return Off
+	}
+}
+
+func ParseUInt8State(relayState uint8) (RelayState, error) {
+	switch relayState {
+	case 0:
+		return On, nil
+	case 1:
+		return Off, nil
+	default:
+		return 0, ErrInvalidRelayState
 	}
 }

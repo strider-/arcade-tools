@@ -33,6 +33,6 @@ func parseArgs() (relay.Relay, relay.RelayState, error) {
 		return 0, 0, err
 	}
 
-	state := relay.ParseState(on)
+	state := relay.ParseBoolState(on)
 	return rly, state, nil
 }
