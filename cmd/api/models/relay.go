@@ -19,13 +19,18 @@ func getName(r relay.Relay) string {
 	}
 }
 
-func NewRelay(r relay.Relay, s relay.RelayState) Relay {
-	// State is using a binary NOT to toggle the 1 bit, to ensure clients
-	// see 1 for on and 0 for off.
+func ToActiveLowState(s relay.RelayState) relay.RelayState {
+	// since the relay is active low, using a
+	// binary NOT to toggle the 1 bit, to ensure clients
+	// get and send 1 for on and 0 for off.
 
+	return s ^ 1
+}
+
+func NewRelay(r relay.Relay, s relay.RelayState) Relay {
 	return Relay{
 		Id:    r,
 		Name:  getName(r),
-		State: s ^ 1,
+		State: ToActiveLowState(s),
 	}
 }

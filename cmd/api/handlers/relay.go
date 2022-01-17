@@ -51,7 +51,7 @@ func SetRelayState(c echo.Context) error {
 		return c.JSON(http.StatusBadRequest, models.NewApiError(err))
 	}
 
-	relay.SetState(rly, state)
+	relay.SetState(rly, models.ToActiveLowState(state))
 
 	return c.NoContent(http.StatusNoContent)
 }

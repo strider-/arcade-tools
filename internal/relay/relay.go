@@ -78,6 +78,7 @@ func ParseBoolState(relayState bool) RelayState {
 	}
 }
 
+// Parses a uint8 into a RelayState. 0 is relay.On, 1 is relay.Off. Returns ErrInvalidRelayState with any other value
 func ParseUInt8State(relayState uint8) (RelayState, error) {
 	switch relayState {
 	case 0:
