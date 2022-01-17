@@ -8,11 +8,6 @@ import (
 )
 
 func main() {
-	if len(flag.Args()) == 0 {
-		fmt.Println("missing arguments, use --help for usage")
-		os.Exit(0)
-	}
-
 	rly, state, err := parseArgs()
 
 	if err != nil {
