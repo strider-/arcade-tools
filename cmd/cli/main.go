@@ -11,7 +11,7 @@ func main() {
 	rly, state, err := parseArgs()
 
 	if err != nil {
-		fmt.Println("invalid arguments, use --help for usage.")
+		fmt.Println("invalid/missing arguments, use --help for usage.")
 		os.Exit(1)
 	}
 
@@ -28,11 +28,11 @@ func parseArgs() (relay.Relay, relay.RelayState, error) {
 	flag.BoolVar(&off, "off", true, "Turn the relay off")
 	flag.Parse()
 
-	pin, err := relay.ParseRelay(r)
+	rly, err := relay.ParseRelay(r)
 	if err != nil {
 		return 0, 0, err
 	}
 
 	state := relay.ParseState(on)
-	return pin, state, nil
+	return rly, state, nil
 }
