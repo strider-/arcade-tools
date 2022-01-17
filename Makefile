@@ -33,7 +33,7 @@ build/api:
 build/cli:
 	@go build -o=./bin/arcade-tools ./cmd/cli/main.go
 
-## install: pulls down the latest code, builds and installs the tools into /opt/tools (run w/ sudo)
+## update: pulls down the latest code, builds and installs the tools into /opt/tools (run w/ sudo)
 .PHONY: update
-install: build
-    @./scripts/update.sh
+update: build
+	@./scripts/update.sh
