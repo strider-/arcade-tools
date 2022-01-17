@@ -32,3 +32,9 @@ build/api:
 .PHONY: build/cli
 build/cli:
 	@go build -o=./bin/arcade-tools ./cmd/cli/main.go
+
+## install: builds and installs the tools into /opt/tools
+.PHONY: install
+install: build
+	@mkdir -p /opt/tools
+	@cp ./bin/* /opt/tools
