@@ -8,12 +8,13 @@ mkdir -p /opt/tools
 cp $local_dir/bin/* /opt/tools
 
 echo "Installing relay power service..."
-cp -u -p $script_dir/relay-power.service /etc/systemd/system
-cp -u -p $script_dir/powerup.sh /opt/tools
+cp -u $script_dir/relay-power.service /etc/systemd/system
+cp -u $script_dir/powerup.sh /opt/tools
+chmod +x /opt/tools/powerup.sh
 systemctl enable relay-power.service
 
 echo "Installing Arcade Tools API service..."
-cp -u -p $script_dir/arcade-api.service /etc/systemd/system
+cp -u $script_dir/arcade-api.service /etc/systemd/system
 systemctl enable arcade-api.service
 systemctl start arcade-api.service
 
