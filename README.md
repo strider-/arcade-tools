@@ -19,7 +19,7 @@ Before you run `make update`, sure you have latest by running `git pull origin m
 ```
 
 ## Expected RPi GPIO pin usage
-NOTE: The relay in question is assumed active low
+NOTE: The [relay](https://www.amazon.com/dp/B0057OC6D8?psc=1) in question is active low, all code reflects this
 | Phys. Pin | GPIO # | Usage |
 |----------:|---------:|-------|
 |     2     |     5V   | Power |
