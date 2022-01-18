@@ -12,12 +12,12 @@ clean:
 ## run/api: run the json api
 .PHONY: run/cli
 run/api:
-	@go run -race ./cmd/api/main.go
+	@go run ./cmd/api/main.go
 
 ## run/cli: run the command line utility
 .PHONY: run/cli
 run/cli:
-	@go run -race ./cmd/cli/main.go
+	@go run ./cmd/cli/main.go
 
 ## build: builds both the json api and command line applications
 .PHONY: build
