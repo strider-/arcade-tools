@@ -11,7 +11,7 @@ printf "$1\n$2\n$3\n`basename ${3%.*}`\n$4" > /tmp/now-playing
 ```
 ...and this line in `/opt/retroarch/configs/all/runcommand-onend.sh`:
 ```bash
-rm -rf /tmp/now-playing
+:>| /tmp/now-playing
 ```
 
 ## Project structure

@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"arcade-tools/cmd/api/models"
 	"errors"
 	"io/ioutil"
 	"net/http"
@@ -14,8 +15,11 @@ const TempFile = "/tmp/now-playing"
 
 func NowPlaying(c echo.Context) error {
 	contents, err := ioutil.ReadFile(TempFile)
-	if errors.Is(err, os.ErrNotExist) {
+
+	if errors.Is(err, os.ErrNotExist) || len(contents) == 0 {
 		return c.NoContent(http.StatusNoContent)
+	} else if err != nil {
+		return c.JSON(http.StatusInternalServerError, models.NewApiError(err))
 	}
 
 	items := strings.Split(string(contents), "\n")
