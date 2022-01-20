@@ -11,6 +11,8 @@ func main() {
 
 	v1 := e.Group("/api/v1")
 
+	v1.GET("/now-playing", handlers.NowPlaying)
+
 	v1.GET("/relays", handlers.GetRelays)
 	v1.GET("/relay/:id", handlers.GetRelay)
 

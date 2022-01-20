@@ -5,6 +5,15 @@ In order to run `make install` or `make update` locally on the Pi, you may need 
 
 Before you run `make update`, sure you have latest by running `git pull origin master`.
 
+The `GET /api/v1/now-playing` endpoint relies on the following line being somewhere in `/opt/retroarch/configs/all/runcommand-onstart.sh`:
+```bash
+printf "$1\n$2\n$3\n`basename ${3%.*}`\n$4" > /tmp/now-playing
+```
+...and this line in `/opt/retroarch/configs/all/runcommand-onend.sh`:
+```bash
+rm -rf /tmp/now-playing
+```
+
 ## Project structure
 ```
 ├── README.md # this document
