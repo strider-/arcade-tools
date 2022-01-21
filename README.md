@@ -3,8 +3,6 @@
 Custom API / CLI tooling for controlling my modified Arcade1Up cabinet. Run `make help` to list all the available make commands for the project.
 In order to run `make install` or `make update` locally on the Pi, you may need to ensure that `$PATH` contains the go binary location (If you're unsure where it's been installed to, run `which go`). To do this, edit `/etc/sudoers` and ensure that `Defaults secure_path` contains the go binary location.
 
-Before you run `make update`, sure you have latest by running `git pull origin master`.
-
 The `GET /api/v1/now-playing` endpoint relies on the following line being somewhere in `/opt/retroarch/configs/all/runcommand-onstart.sh`:
 ```bash
 printf "$1\n$2\n$3\n`basename ${3%.*}`\n$4" > ${AC_NOW_PLAYING_FILE:-/tmp/now-playing}

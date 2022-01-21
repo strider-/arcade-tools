@@ -5,6 +5,9 @@ if [[ `id -u` -ne 0 ]] ; then
     exit 1
 fi
 
+echo "Fetching latest code"
+sudo -u $SUDO_USER -E git reset --hard && git pull origin master
+
 local_dir=$(readlink -e "${0%/*}/..")
 
 echo "Stopping Arcade Tools API Service..."
