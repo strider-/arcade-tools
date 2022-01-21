@@ -1,5 +1,10 @@
 #!/bin/bash
 
+if [[ `id -u` -ne 0 ]] ; then 
+    echo "Update script should be ran as root, run 'sudo make update' instead."
+    exit 1
+fi
+
 local_dir=$(readlink -e "${0%/*}/..")
 
 echo "Stopping Arcade Tools API Service..."

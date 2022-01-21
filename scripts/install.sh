@@ -1,5 +1,10 @@
 #!/bin/bash
 
+if [[ `id -u` -ne 0 ]] ; then 
+    echo "Install script should be ran as root, run 'sudo make install' instead."
+    exit 1
+fi
+
 local_dir=$(readlink -e "${0%/*}/..")
 script_dir=$(readlink -e "${0%/*}")
 
