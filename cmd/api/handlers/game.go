@@ -2,6 +2,7 @@ package handlers
 
 import (
 	"arcade-tools/cmd/api/models"
+	"arcade-tools/internal/utils"
 	"errors"
 	"io/ioutil"
 	"net/http"
@@ -11,10 +12,10 @@ import (
 	"github.com/labstack/echo"
 )
 
-const TempFile = "/tmp/now-playing"
-
 func NowPlaying(c echo.Context) error {
-	contents, err := ioutil.ReadFile(TempFile)
+	npFile := utils.GetEnvOrDefault("AC_NOW_PLAYING_FILE", "/tmp/now-playing")
+
+	contents, err := ioutil.ReadFile(npFile)
 
 	if errors.Is(err, os.ErrNotExist) || len(contents) == 0 {
 		return c.NoContent(http.StatusNoContent)

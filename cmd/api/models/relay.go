@@ -1,6 +1,9 @@
 package models
 
-import "arcade-tools/internal/relay"
+import (
+	"arcade-tools/internal/relay"
+	"arcade-tools/internal/utils"
+)
 
 type Relay struct {
 	Id    uint8            `json:"id"`
@@ -11,9 +14,9 @@ type Relay struct {
 func toDTO(r relay.Relay) (uint8, string) {
 	switch r {
 	case relay.Relay1:
-		return 1, "lighting"
+		return 1, utils.GetEnvOrDefault("AC_RELAY1_NAME", "lighting")
 	case relay.Relay2:
-		return 2, "monitor"
+		return 2, utils.GetEnvOrDefault("AC_RELAY2_NAME", "monitor")
 	default:
 		return 0, "unknown"
 	}

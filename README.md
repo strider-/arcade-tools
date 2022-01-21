@@ -7,11 +7,11 @@ Before you run `make update`, sure you have latest by running `git pull origin m
 
 The `GET /api/v1/now-playing` endpoint relies on the following line being somewhere in `/opt/retroarch/configs/all/runcommand-onstart.sh`:
 ```bash
-printf "$1\n$2\n$3\n`basename ${3%.*}`\n$4" > /tmp/now-playing
+printf "$1\n$2\n$3\n`basename ${3%.*}`\n$4" > ${AC_NOW_PLAYING_FILE:-/tmp/now-playing}
 ```
 ...and this line in `/opt/retroarch/configs/all/runcommand-onend.sh`:
 ```bash
-:>| /tmp/now-playing
+:>| ${AC_NOW_PLAYING_FILE:-/tmp/now-playing}
 ```
 
 ## Project structure
@@ -35,6 +35,13 @@ NOTE: The [relay](https://www.amazon.com/dp/B0057OC6D8?psc=1) in question is act
 |     9     |     GND  | Ground|
 |    11     |     17   | Relay 2|
 |    12     |     18   | Relay 1|
+
+## Configuration
+| Env. Var | Default | Usage |
+|----------|---------|-------|
+| `AC_NOW_PLAYING_FILE` | `/tmp/now-playing` | populated with info of ROM in play, empty when no game is being played |
+| `AC_RELAY1_NAME` | `lighting` | A friendly name for what is plugged into relay #1 |
+| `AC_RELAY2_NAME` | `monitor` | A friendly name for what is plugged into relay #2 |
 
 
 ## Command Line Interface Arguments
