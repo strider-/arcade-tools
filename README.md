@@ -37,11 +37,20 @@ NOTE: The [relay](https://www.amazon.com/dp/B0057OC6D8?psc=1) in question is act
 |    12     |     18   | Relay 1|
 
 ## Configuration
+
 | Env. Var | Default | Usage |
 |----------|---------|-------|
 | `AC_NOW_PLAYING_FILE` | `/tmp/now-playing` | populated with info of ROM in play, empty when no game is being played |
 | `AC_RELAY1_NAME` | `lighting` | A friendly name for what is plugged into relay #1 |
 | `AC_RELAY2_NAME` | `monitor` | A friendly name for what is plugged into relay #2 |
+
+To specify these values for the `arcade-api.service`, after installation run `systemctl edit arcade-api.service` and populate it like so, 
+replacing `<Key>` with one of the above environment variable names and `<Value>` with your new value. After you save the file, run `systemctl restart arcade-api.service` for your changes to take effect.
+```
+[Service]
+Environment=<Key>=<Value>
+...
+```
 
 
 ## Command Line Interface Arguments
