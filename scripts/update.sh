@@ -6,7 +6,7 @@ if [[ `id -u` -ne 0 ]] ; then
 fi
 
 echo "Fetching latest code"
-sudo -u $SUDO_USER -E git reset --hard && git pull origin master
+sudo -u $SUDO_USER -E git pull origin master
 
 local_dir=$(readlink -e "${0%/*}/..")
 
