@@ -1,16 +1,18 @@
-import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { CssBaseline } from '@mui/material';
-import Box from '@mui/material/Box';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import Home from './Home';
 
-const theme = createTheme({ palette: { mode: "dark" } });
+const theme = createTheme({
+    palette: {
+        mode: 'dark',
+    },
+});
 
 function App() {
     return (
         <ThemeProvider theme={theme}>
             <CssBaseline />
-            <Box sx={{ flexGrow: 1 }} m={2}>
-
-            </Box>
+            <Home />
         </ThemeProvider>
     );
 }
