@@ -21,8 +21,9 @@ printf "$1\n$2\n$3\n`basename ${3%.*}`\n$4" > ${AC_NOW_PLAYING_FILE:-/tmp/now-pl
 │   ├── api   # json api project
 │   └── cli   # command line interface project
 ├── internal  # private library code
-└── scripts   # project scripts/service definitions
-              # to be ran/installed on the RPi via make
+├── scripts   # project scripts/service definitions
+│             # to be ran/installed on the RPi via make
+└── ui        # front-end for the json api
 ```
 
 ## Expected RPi GPIO pin usage
