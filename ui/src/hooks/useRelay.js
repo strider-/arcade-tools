@@ -6,18 +6,18 @@ const useRelay = (relayId) => {
     const [enabled, setEnabled] = useState()
     const { data, isLoading } = useQuery(["v1", "relay", { id: relayId }], async () => await getRelay(relayId),
         {
-            onSettled: (data) => setEnabled(data?.result?.state || 0)
+            onSettled: (data) => setEnabled(data?.result?.state === 1 ? true : false)
         })
     const { isOnline } = data || {};
 
     const toggle = async () => {
         if (isOnline) {
-            await setRelay(relayId, enabled ^ 1)
-            setEnabled(enabled ^ 1)
+            await setRelay(relayId, !enabled)
+            setEnabled(!enabled)
         }
     }
 
-    return { isOnline, enabled: enabled === 1, isLoading, toggle }
+    return { isOnline, enabled, isLoading, toggle }
 }
 
 export default useRelay;
