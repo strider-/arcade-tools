@@ -82,5 +82,4 @@ POST /api/v1/relays/:id # change relay state, id must be 1 or 2
 ```
 
 ## Front End Configuration
-Create a `.env` file based on the `.env.example` provided, populating the `REACT_APP_ARCADE_API_URL` accordingly. Use `yarn start` to run the
-project locally. There are no assumptions as to a deployment target, so after performing `yarn build`, you're on your own for hosting it.
+Create a `.env` file based on the `.env.example` provided, populating the `REACT_APP_ARCADE_API_URL` accordingly. After running `npm install`, use `yarn start` to run the project locally. There are no assumptions as to a deployment target, so after performing `yarn build`, you're on your own for hosting it.
