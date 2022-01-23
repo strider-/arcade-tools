@@ -4,10 +4,12 @@ import (
 	"arcade-tools/cmd/api/handlers"
 
 	"github.com/labstack/echo"
+	"github.com/labstack/echo/middleware"
 )
 
 func main() {
 	e := echo.New()
+	e.Use(middleware.CORS())
 
 	v1 := e.Group("/api/v1")
 
