@@ -6,7 +6,7 @@ const useRelay = (relayId) => {
     const [enabled, setEnabled] = useState()
     const { data, isLoading } = useQuery(["v1", "relay", { id: relayId }], async () => await getRelay(relayId),
         {
-            onSettled: (data) => setEnabled(data.result.state)
+            onSettled: (data) => setEnabled(data?.result?.state || 0)
         })
     const { isOnline } = data || {};
 

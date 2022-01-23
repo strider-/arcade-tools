@@ -20,7 +20,7 @@ const Home = () => {
                         alt="placeholder"
                         image="/npph.jpg" />
                 </Card>
-                <Stack direction="row" spacing={2}>
+                <Stack direction="row" spacing={2} sx={{ height: 80 }}>
                     <RelayButton
                         relayId={1}
                         caption="Lighting"
