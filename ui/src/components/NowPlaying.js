@@ -8,7 +8,8 @@ const NowPlaying = () => {
         return <Skeleton variant="rectangular" width={303} height={450} sx={{ my: 2 }} />
     }
 
-    var img = "/npph.png"
+    var img
+
     if (!isOnline) {
         img = "/offline.png"
     } else if (isInMenus) {
@@ -21,7 +22,7 @@ const NowPlaying = () => {
         <Card sx={{ minWidth: 275, minHeight: 450, my: 2 }} variant="outlined">
             <CardMedia
                 component="img"
-                alt="Current Status"
+                alt={game?.romName || 'Current Status'}
                 image={img} />
         </Card>
     )
