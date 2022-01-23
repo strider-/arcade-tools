@@ -1,13 +1,9 @@
 import { Card, CardMedia, Grid, Stack } from '@mui/material';
 import LightModeIcon from '@mui/icons-material/LightMode';
 import MonitorIcon from '@mui/icons-material/Monitor';
-import { useState } from 'react';
 import RelayButton from './components/RelayButton';
 
 const Home = () => {
-    const [isLit, setIsLit] = useState(true)
-    const [hasDisplay, setHasDisplay] = useState(true)
-
     return (
         <Grid
             container
@@ -24,18 +20,16 @@ const Home = () => {
                         alt="placeholder"
                         image="/npph.jpg" />
                 </Card>
-                <Stack direction="row" spacing={2} sx={{ height: 80 }}>
+                <Stack direction="row" spacing={2}>
                     <RelayButton
+                        relayId={1}
                         caption="Lighting"
                         icon={<LightModeIcon />}
-                        onToggle={setIsLit}
-                        enabled={isLit}
                     />
                     <RelayButton
+                        relayId={2}
                         caption="Monitor"
                         icon={<MonitorIcon />}
-                        onToggle={setHasDisplay}
-                        enabled={hasDisplay}
                     />
                 </Stack>
             </Grid>
