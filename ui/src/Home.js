@@ -1,7 +1,8 @@
-import { Card, CardMedia, Grid, Stack } from '@mui/material';
+import { Grid, Stack } from '@mui/material';
 import LightModeIcon from '@mui/icons-material/LightMode';
 import MonitorIcon from '@mui/icons-material/Monitor';
 import RelayButton from './components/RelayButton';
+import NowPlaying from './components/NowPlaying';
 
 const Home = () => {
     return (
@@ -11,26 +12,12 @@ const Home = () => {
             direction="column"
             alignItems="center"
             justifyContent="center"
-            style={{ minHeight: '90vh' }}
-        >
+            style={{ minHeight: '90vh' }}>
             <Grid item xs={3}>
-                <Card sx={{ minWidth: 275, minHeight: 450, my: 2 }} variant="outlined">
-                    <CardMedia
-                        component="img"
-                        alt="placeholder"
-                        image="/npph.jpg" />
-                </Card>
+                <NowPlaying />
                 <Stack direction="row" spacing={2} sx={{ height: 80 }}>
-                    <RelayButton
-                        relayId={1}
-                        caption="Lighting"
-                        icon={<LightModeIcon />}
-                    />
-                    <RelayButton
-                        relayId={2}
-                        caption="Monitor"
-                        icon={<MonitorIcon />}
-                    />
+                    <RelayButton relayId={1} icon={<LightModeIcon />} />
+                    <RelayButton relayId={2} icon={<MonitorIcon />} />
                 </Stack>
             </Grid>
         </Grid>

@@ -9,7 +9,7 @@ const fetchWithTimeout = async (url, opts) => {
         setTimeout(() => controller.abort(), requestTimeout)
         const resp = await fetch(url, { signal: controller.signal, ...opts })
 
-        return { isOnline: true, status: resp.status, result: await resp.json() }
+        return { isOnline: true, status: resp.status, result: resp.status === 204 ? {} : await resp.json() }
     } catch (error) {
         return { isOnline: false }
     }

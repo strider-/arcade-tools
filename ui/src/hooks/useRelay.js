@@ -8,7 +8,7 @@ const useRelay = (relayId) => {
         {
             onSettled: (data) => setEnabled(data?.result?.state === 1 ? true : false)
         })
-    const { isOnline } = data || {};
+    const { isOnline, result: { name } = {} } = data || {};
 
     const toggle = async () => {
         if (isOnline) {
@@ -17,7 +17,7 @@ const useRelay = (relayId) => {
         }
     }
 
-    return { isOnline, enabled, isLoading, toggle }
+    return { isOnline, enabled, name, isLoading, toggle }
 }
 
 export default useRelay;
