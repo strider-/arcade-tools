@@ -35,7 +35,7 @@ NOTE: The [relay](https://www.amazon.com/dp/B0057OC6D8?psc=1) in question is act
 |    11     |     17   | Relay 2|
 |    12     |     18   | Relay 1|
 
-## Configuration
+## JSON API Configuration
 
 | Env. Var | Default | Usage |
 |----------|---------|-------|
@@ -80,3 +80,7 @@ POST /api/v1/relays/:id # change relay state, id must be 1 or 2
 # { "state": 1 } to turn a relay on
 # { "state": 0 } to turn a relay off
 ```
+
+## Front End Configuration
+Create a `.env` file based on the `.env.example` provided, populating the `REACT_APP_ARCADE_API_URL` accordingly. Use `yarn start` to run the
+project locally. There are no assumptions as to a deployment target, so after performing `yarn build`, you're on your own for hosting it.
