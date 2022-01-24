@@ -4,10 +4,11 @@ help:
 	@echo 'Usage: '
 	@sed -n 's/^##//p' ${MAKEFILE_LIST} | column -t -s ':' | sed -e 's/^/ /'
 
-## clean: deletes the ./bin directory
+## clean: deletes the ./bin and ./ui/build directories
 .PHONY: clean
 clean:
 	@rm -rf ./bin/
+	@rm -rf ./ui/build
 
 ## run/api: run the json api
 .PHONY: run/cli
@@ -33,12 +34,12 @@ build/api:
 build/cli:
 	@go build -o=./bin/arcade-tools ./cmd/cli/main.go
 
-## install: builds and installs the tools and services (run w/ sudo). once installed, use make update to keep them up-to-date.
+## install: [Run this on the Pi] builds and installs the tools and services (run w/ sudo). once installed, use make update to keep them up-to-date.
 .PHONY: install
 install: build
 	@./scripts/install.sh
 
-## update: builds and updates the tools at /opt/tools (run w/ sudo)
+## update: [Run this on the Pi] builds and updates the tools at /opt/tools (run w/ sudo)
 .PHONY: update
 update: build
 	@./scripts/update.sh
