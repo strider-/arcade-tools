@@ -42,3 +42,9 @@ install: build
 .PHONY: update
 update: build
 	@./scripts/update.sh
+
+## deploy/fe: builds and deploys the front end via ssh/scp
+.PHONY: deploy/fe
+deploy/fe:
+	@if [ -z "${target}" ]; then echo "Usage: make deploy/fe target=<user@host>"; exit 1; fi
+	@./scripts/deploy.fe.sh ${target}
