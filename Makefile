@@ -41,7 +41,7 @@ install: build
 
 ## update: [Run this on the Pi] builds and updates the tools at /opt/tools (run w/ sudo)
 .PHONY: update
-update: build
+update:
 	@./scripts/update.sh
 
 ## deploy/fe: builds and deploys the front end via ssh/scp

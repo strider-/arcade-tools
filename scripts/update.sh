@@ -5,10 +5,13 @@ if [[ `id -u` -ne 0 ]] ; then
     exit 1
 fi
 
+local_dir=$(readlink -e "${0%/*}/..")
+
 echo "Fetching latest code"
 sudo -u $SUDO_USER -E git pull origin master
 
-local_dir=$(readlink -e "${0%/*}/..")
+echo "Building tools"
+make build
 
 echo "Stopping Arcade Tools API Service..."
 systemctl stop arcade-api.service
