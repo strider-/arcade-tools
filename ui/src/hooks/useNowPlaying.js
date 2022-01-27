@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useQuery } from "react-query";
-import { nowPlaying } from "./api";
+import { killRetroArch, nowPlaying } from "./api";
 
 const interval = 5000
 
@@ -14,7 +14,11 @@ const useNowPlaying = () => {
 
     const { isOnline, status, result: game } = data || {};
 
-    return { isOnline, isLoading, isInMenus: status === 204, game }
+    const kill = async () => {
+        await killRetroArch()
+    }
+
+    return { isOnline, isLoading, isInMenus: status === 204, game, kill }
 }
 
 export default useNowPlaying;

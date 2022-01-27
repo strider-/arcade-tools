@@ -9,7 +9,7 @@ const fetchWithTimeout = async (url, opts) => {
         setTimeout(() => controller.abort(), requestTimeout)
         const resp = await fetch(url, { signal: controller.signal, ...opts })
 
-        return { isOnline: true, status: resp.status, result: resp.status === 204 ? {} : await resp.json() }
+        return { isOnline: true, status: resp.status, result: resp.status === 204 ? null : await resp.json() }
     } catch (error) {
         return { isOnline: false }
     }
@@ -41,3 +41,6 @@ export const setRelay = async (relayId, enabled) =>
 
 export const nowPlaying = async () =>
     await apiGet('/now-playing')
+
+export const killRetroArch = async () =>
+    await apiPost('/kill')
