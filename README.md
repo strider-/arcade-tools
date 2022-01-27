@@ -73,13 +73,17 @@ $ arcade-tools -relay 2 -off
 ## JSON API endpoints
 
 ```
-GET /api/v1/now-playing # get info on the game being played,
-                        # returns a 204 if no game is active
+GET  /api/v1/now-playing # get info on the game being played,
+                         # returns a 204 if no game is active
 
-GET /api/v1/relays      # get info on both relays
-GET /api/v1/relays/:id  # get info on specific relay, id must be 1 or 2
+POST /api/v1/kill        # terminates the retroarch process,
+                         # use in cases where emulation locks up.
+                         # should dump you back to the ES menu
 
-POST /api/v1/relays/:id # change relay state, id must be 1 or 2
+GET  /api/v1/relays      # get info on both relays
+GET  /api/v1/relays/:id  # get info on specific relay, id must be 1 or 2
+
+POST /api/v1/relays/:id  # change relay state, id must be 1 or 2
 # { "state": 1 } to turn a relay on
 # { "state": 0 } to turn a relay off
 ```

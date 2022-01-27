@@ -4,6 +4,7 @@ go 1.17
 
 require (
 	github.com/labstack/echo v3.3.10+incompatible
+	github.com/mitchellh/go-ps v1.0.0
 	github.com/stianeikeland/go-rpio/v4 v4.6.0
 )
 

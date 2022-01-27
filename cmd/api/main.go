@@ -18,6 +18,8 @@ func main() {
 
 	v1.GET("/now-playing", handlers.NowPlaying)
 
+	v1.POST("/kill", handlers.KillRetroarch)
+
 	v1.GET("/relays", handlers.GetRelays)
 	v1.GET("/relays/:id", handlers.GetRelay)
 

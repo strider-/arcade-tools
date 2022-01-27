@@ -10,6 +10,13 @@ import (
 	"strings"
 
 	"github.com/labstack/echo"
+	ps "github.com/mitchellh/go-ps"
+)
+
+var (
+	ErrFailedToListProcesses = errors.New("could not enumerate running processes")
+	ErrFailedToKillRetroArch = errors.New("could not terminate the retroarch process")
+	ErrRetroArchIsNotRunning = errors.New("retroarch is not running")
 )
 
 func NowPlaying(c echo.Context) error {
@@ -38,4 +45,26 @@ func NowPlaying(c echo.Context) error {
 		RomName:  items[3],
 		Command:  items[4],
 	})
+}
+
+func KillRetroarch(c echo.Context) error {
+	processList, err := ps.Processes()
+	if err != nil {
+		return c.JSON(http.StatusInternalServerError, models.NewApiError(ErrFailedToListProcesses))
+	}
+
+	for _, p := range processList {
+		if p.Executable() == "retroarch" {
+			osp := os.Process{Pid: p.Pid()}
+			err = osp.Kill()
+
+			if err != nil {
+				return c.JSON(http.StatusInternalServerError, models.NewApiError(ErrFailedToKillRetroArch))
+			}
+
+			return c.NoContent(http.StatusNoContent)
+		}
+	}
+
+	return c.JSON(http.StatusBadRequest, models.NewApiError(ErrRetroArchIsNotRunning))
 }
