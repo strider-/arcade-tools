@@ -1,0 +1,8 @@
+name: arcade_fe
+services:
+  web:
+    environment:
+      - REACT_APP_ARCADE_API_URL=http://192.168.50.58:4380
+    build: .
+    ports:
+      - 8080:3000
